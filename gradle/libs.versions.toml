@@ -1,0 +1,21 @@
+[versions]
+xpp3 = "1.1.4c"
+smali = "3.0.9.RE"
+multidexlib2 = "3.0.3.E3.RE"
+arscLib = "1.1.7"
+kotlin = "2.0.0"
+android = "4.1.1.4"
+smali-dexlib2 = "3.0.9.RE"   # <--- NUEVO
+guava = "31.1-android"
+
+[libraries]
+xpp3 = { group = "xpp3", name = "xpp3", version.ref = "xpp3" }
+smali = { group = "com.extenre", name = "smali", version.ref = "smali" }
+multidexlib2 = { group = "com.extenre", name = "multidexlib2", version.ref = "multidexlib2" }
+arscLib = { group = "io.github.reandroid", name = "ARSCLib", version.ref = "arscLib" }
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+android = { group = "com.google.android", name = "android", version.ref = "android" }
+# NUEVO: smali-dexlib2 con groupId CORRECTO
+smali-dexlib2 = { group = "com.extenre", name = "smali-dexlib2", version.ref = "smali-dexlib2" }
+guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }

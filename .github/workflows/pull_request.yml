@@ -1,0 +1,20 @@
+name: PR to master
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+
+jobs:
+  pull-request:
+    name: Open pull request
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: 'master'   # Cambiado de main a master
+          pr_title: 'chore: merge branch ${{ github.ref_name }} to master'
+          pr_body: 'This pull request merges changes from `${{ github.ref_name }}` into `master`.'
+          pr_draft: true
