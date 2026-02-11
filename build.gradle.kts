@@ -119,6 +119,18 @@ publishing {
 } // ← CIERRE DE PUBLISHING
 
 signing {
-    useGpgCmd()
+    if (
+        System.getenv("GPG_KEY_ID") == null
+        || System.getenv("GPG_KEY") == null
+        || System.getenv("GPG_KEY_PASSWORD") == null
+    ) {
+        logger.warn("GPG environment variables not set; skipping signing.")
+        return@signing
+    }
+    useInMemoryPgpKeys(
+        System.getenv("GPG_KEY_ID"),
+        System.getenv("GPG_KEY"),
+        System.getenv("GPG_KEY_PASSWORD")
+    )
     sign(publishing.publications["extenre-patcher-publication"])
-} // ← CIERRE DE SIGNING
+}
