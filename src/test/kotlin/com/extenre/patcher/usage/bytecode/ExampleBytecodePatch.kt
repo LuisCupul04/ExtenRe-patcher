@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) 2026 LuisCupul04
+ * Copyright (C) 2022 inotia00
+ * Copyright (C) 2022 ReVanced LLC
+ *
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
 package com.extenre.patcher.usage.bytecode
 
 import com.extenre.patcher.BytecodeContext
@@ -59,7 +67,7 @@ class ExampleBytecodePatch : BytecodePatch(listOf(ExampleFingerprint)) {
         // This will be the index of the instruction with the opcode CONST_STRING.
         val startIndex = result.scanResult.patternScanResult!!.startIndex
 
-        implementation.replaceStringAt(startIndex, "Hello, ReVanced! Editing bytecode.")
+        implementation.replaceStringAt(startIndex, "Hello, ExtenRe! Editing bytecode.")
 
         // Get the class in which the method matching our fingerprint is defined in.
         val mainClass = context.classes.findClassProxied {
@@ -82,7 +90,7 @@ class ExampleBytecodePatch : BytecodePatch(listOf(ExampleFingerprint)) {
                         BuilderInstruction21c(
                             Opcode.CONST_STRING,
                             0,
-                            ImmutableStringReference("Hello, ReVanced! Adding bytecode.")
+                            ImmutableStringReference("Hello, ExtenRe! Adding bytecode.")
                         ),
                         BuilderInstruction11x(Opcode.RETURN_OBJECT, 0)
                     ),

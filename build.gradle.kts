@@ -87,7 +87,7 @@ publishing {
 
             pom {
                 name = "ExtenRe Patcher"
-                description = "ExtenRe Project."
+                description = "ExtenRe Project - Framework for patching and optimizing applications."
 
                 licenses {
                     license {
@@ -101,22 +101,17 @@ publishing {
                         id = "LuisCupul04"
                         name = "LuisCupul04"
                     }
-                    developer {
-                        id = "ReVanced"
-                        name = "ReVanced"
-                        email = "contact@revanced.app"
-                    }
                 }
 
                 scm {
                     connection = "scm:git:git://github.com/LuisCupul04/extenre-patcher.git"
                     developerConnection = "scm:git:git@github.com:LuisCupul04/extenre-patcher.git"
                     url = "https://github.com/LuisCupul04/extenre-patcher"
-                } // ← CIERRE DE SCM
-            } // ← CIERRE DE POM
-        } // ← CIERRE DE CREATE
-    } // ← CIERRE DE PUBLICATIONS
-} // ← CIERRE DE PUBLISHING
+                }
+            }
+        }
+    }
+}
 
 signing {
     if (
