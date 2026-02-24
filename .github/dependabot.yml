@@ -1,0 +1,34 @@
+version: 2
+
+# Sección para definir registros privados
+registries:
+  github-smali-re:
+    type: maven-repository
+    url: https://maven.pkg.github.com/luiscupul04/smali-RE
+    username: LuisCupul04
+    password: ${{secrets.EXTEN_TOKEN}}
+
+updates:
+  - package-ecosystem: github-actions
+    labels: []
+    directory: /
+    target-branch: master
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: npm
+    labels: []
+    directory: /
+    target-branch: master
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: gradle
+    labels: []
+    directory: /
+    target-branch: master
+    schedule:
+      interval: monthly
+    # Asociamos el registro privado a este ecosistema
+    registries:
+      - github-smali-re

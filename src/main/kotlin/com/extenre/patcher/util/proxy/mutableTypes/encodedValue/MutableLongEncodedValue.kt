@@ -1,0 +1,28 @@
+/*
+ * Copyright (C) 2022 ReVanced LLC
+ * Copyright (C) 2022 inotia00
+ * Copyright (C) 2026 LuisCupul04
+ *
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
+package com.extenre.patcher.util.proxy.mutableTypes.encodedValue
+
+import com.android.tools.smali.dexlib2.base.value.BaseLongEncodedValue
+import com.android.tools.smali.dexlib2.iface.value.LongEncodedValue
+
+class MutableLongEncodedValue(longEncodedValue: LongEncodedValue) :
+    BaseLongEncodedValue(),
+    MutableEncodedValue {
+    private var value = longEncodedValue.value
+
+    override fun getValue(): Long = this.value
+
+    fun setValue(value: Long) {
+        this.value = value
+    }
+
+    companion object {
+        fun LongEncodedValue.toMutable(): MutableLongEncodedValue = MutableLongEncodedValue(this)
+    }
+}
