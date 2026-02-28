@@ -83,7 +83,7 @@ kotlin {
     }
     compilerOptions {
         jvmTarget = JvmTarget.JVM_21
-        freeCompilerArgs = listOf("-Xcontext-receivers")
+        freeCompilerArgs = listOf("-Xcontext-parameters")
     }
 }
 
@@ -93,8 +93,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/luiscupul04/extenre-patcher")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = githubUsername   // ← usa la variable definida arriba
+                password = githubPassword   // ← usa la variable definida arriba
             }
         }
     }

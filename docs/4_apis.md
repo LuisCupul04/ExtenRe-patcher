@@ -119,7 +119,4 @@ execute {
 ExtenRe Patcher is a powerful library to patch Android applications, offering a rich set of APIs to develop patches
 that outlive app updates. Patches make up ExtenRe; without you, the community of patch developers,
 ExtenRe would not be what it is today. We hope that this documentation has been helpful to you
-and are excited to see what you will create with ExtenRe Patcher. If you have any questions or need help,
-talk to us on one of our platforms linked on [ExtenRe.app](https://ExtenRe.app) or open an issue in case of a bug or
-feature request,  
-ExtenRe
+and are excited to see what you will create with ExtenRe Patcher.

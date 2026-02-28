@@ -26,6 +26,8 @@ import java.io.Closeable
 import java.io.FileFilter
 import java.util.logging.Logger
 
+import com.extenre.patcher.util.proxy.mutableTypes.MutableClass
+
 /**
  * A context for patches containing the current state of the bytecode.
  *
@@ -54,6 +56,12 @@ class BytecodePatchContext internal constructor(private val config: PatcherConfi
             null,
         ).also { opcodes = it.opcodes }.classes
     )
+
+    /**
+     * All mutable classes for the target app and any extension classes.
+     */
+    val mutableClasses: Collection<MutableClass>
+        get() = patchClasses.classMap.values.map { patchClasses.mutableClassBy(it.classDef) }
 
     /**
      * Merge the extension of [bytecodePatch] into the [BytecodePatchContext].

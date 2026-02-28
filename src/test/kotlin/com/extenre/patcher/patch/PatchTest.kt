@@ -10,6 +10,7 @@ package com.extenre.patcher.patch
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 
 internal object PatchTest {
     @Test
@@ -27,8 +28,10 @@ internal object PatchTest {
             )
         }
 
-        assertEquals(1, patch.compatiblePackages!!.size)
-        assertEquals("compatible.package", patch.compatiblePackages!!.first().first)
+        val packages = patch.compatiblePackages
+        assertNotNull(packages, "compatiblePackages should not be null")
+        assertEquals(1, packages.size)
+        assertEquals("compatible.package", packages.first().first)
     }
 
     @Test
