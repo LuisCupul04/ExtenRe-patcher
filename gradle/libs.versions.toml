@@ -1,0 +1,27 @@
+[versions]
+# Kotlin
+kotlin = "2.0.0"
+
+# Dependencias directas
+xpp3 = "1.1.4c"
+smali = "3.0.9.RE"
+multidexlib2 = "3.0.3.E3.RE"
+arscLib = "1.1.7"
+android = "4.1.1.4"
+
+# Tests (usando la misma versión de Kotlin)
+kotlin-test = { require = "2.0.0" }
+smali-dexlib2 = "3.0.9.RE"
+
+[libraries]
+# Kotlin (agrupadas por módulo)
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+# Otras dependencias
+xpp3 = { module = "xpp3:xpp3", version.ref = "xpp3" }
+smali = { module = "com.extenre:smali", version.ref = "smali" }
+multidexlib2 = { module = "com.extenre:multidexlib2", version.ref = "multidexlib2" }
+reandroid-arsc = { module = "io.github.reandroid:ARSCLib", version.ref = "arscLib" }
+google-android = { module = "com.google.android:android", version.ref = "android" }
+smali-dexlib2 = { group = "com.extenre", name = "smali-dexlib2", version.ref = "smali-dexlib2" }

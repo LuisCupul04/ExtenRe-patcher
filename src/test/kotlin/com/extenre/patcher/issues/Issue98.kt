@@ -1,0 +1,26 @@
+/*
+ * Copyright (C) 2022 ReVanced LLC
+ * Copyright (C) 2022 inotia00
+ * Copyright (C) 2026 LuisCupul04
+ *
+ * SPDX-License-Identifier: GPL-3.0-only
+ */
+
+package com.extenre.patcher.issues
+
+import com.extenre.patcher.patch.PatchOption
+import org.junit.jupiter.api.Test
+import kotlin.test.assertNull
+
+internal class Issue98 {
+    companion object {
+        var key1: String? by PatchOption.StringOption(
+            "key1", null, "title", "description"
+        )
+    }
+
+    @Test
+    fun `should infer nullable type correctly`() {
+        assertNull(key1)
+    }
+}
