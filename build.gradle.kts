@@ -65,7 +65,7 @@ publishing {
         // Repositorio para GitHub Packages (siempre agregado)
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/luiscupul04/ExtenRe-patcher-re")
+            url = uri("https://maven.pkg.github.com/luiscupul04/ExtenRe-patcher")
             credentials {
                 username = githubUsername
                 password = githubPassword
