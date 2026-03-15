@@ -1,1 +1,1 @@
-rootProject.name = "extenre-patcher-2"
+rootProject.name = "extenre-patcher-re"
