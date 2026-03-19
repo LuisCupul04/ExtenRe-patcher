@@ -1,15 +1,26 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    kotlin("jvm") version "2.3.10"
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.binary.compatibility.validator)
     `maven-publish`
     signing
 }
 
 group = "com.extenre"
 
-val githubUsername: String = project.findProperty("gpr.user") as? String ?: System.getenv("GITHUB_ACTOR")
-val githubPassword: String = project.findProperty("gpr.key") as? String ?: System.getenv("GITHUB_TOKEN")
+tasks {
+    processResources {
+        expand("projectVersion" to project.version)
+    }
+
+    test {
+        useJUnitPlatform()
+        testLogging {
+            events("PASSED", "SKIPPED", "FAILED")
+        }
+    }
+}
 
 repositories {
     mavenCentral()
@@ -19,82 +30,71 @@ repositories {
     maven {
         url = uri("https://maven.pkg.github.com/luiscupul04/smali-RE")
         credentials {
-            username = githubUsername
-            password = githubPassword
+            username = project.findProperty("gpr.user") as? String ?: System.getenv("GITHUB_ACTOR")
+            password = project.findProperty("gpr.key") as? String ?: System.getenv("GITHUB_TOKEN")
         }
     }
     maven {
         url = uri("https://maven.pkg.github.com/luiscupul04/multidexlib2")
         credentials {
-            username = githubUsername
-            password = githubPassword
+            username = project.findProperty("gpr.user") as? String ?: System.getenv("GITHUB_ACTOR")
+            password = project.findProperty("gpr.key") as? String ?: System.getenv("GITHUB_TOKEN")
         }
     }
     // Si también usas Apktool-Re desde GitHub Packages, añade:
     // maven {
-    //     url = uri("https://maven.pkg.github.com/luiscupul04/Apktool-Re")
+    //     url = uri("https://maven.pkg.github.com/luiscupul04/Apktool")
     //     credentials { username = githubUsername; password = githubPassword }
     // }
 }
 
 dependencies {
-    // Dependencias de compilación (solo para compilar, no se empaquetan)
+    // TODO: Convert project to KMP.
     compileOnly(libs.android) {
+        // Exclude, otherwise the org.w3c.dom API breaks.
         exclude(group = "xerces", module = "xmlParserAPIs")
     }
 
-    // Dependencias principales
     implementation(libs.apktool.lib)
-
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.multidexlib2) {
-        exclude(group = "com.android.tools.smali", module = "smali-dexlib2")
-    }
+    implementation(libs.multidexlib2)
     implementation(libs.smali)
 
-    // Tests
     testImplementation(libs.mockk)
     testImplementation(libs.kotlin.test)
 }
 
-tasks {
-    test {
-        useJUnitPlatform()
-        testLogging {
-            events("PASSED", "SKIPPED", "FAILED")
-        }
-    }
-    processResources {
-        expand("projectVersion" to project.version)
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+
+        freeCompilerArgs = listOf("-Xcontext-receivers")
     }
 }
+
+tasks.withType<Test> {
+    testLogging {
+        // Uncomment to show println and exception stack traces in unit tests.
+        // showStandardStreams = true
+    }
+}
+
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-    withSourcesJar()
-}
+    targetCompatibility = JavaVersion.VERSION_17
 
-kotlin {
-    jvmToolchain {
-        (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(21))
-    }
-    compilerOptions {
-        jvmTarget = JvmTarget.JVM_21
-        freeCompilerArgs = listOf("-Xcontext-parameters")
-    }
+    withSourcesJar()
 }
 
 publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/luiscupul04/extenre-patcher")
+            url = uri("https://maven.pkg.github.com/LuisCupul04/extenre-patcher")
             credentials {
-                username = githubUsername   // ← usa la variable definida arriba
-                password = githubPassword   // ← usa la variable definida arriba
+                username = providers.gradleProperty("gpr.user").getOrElse(System.getenv("GITHUB_ACTOR"))
+                password = providers.gradleProperty("gpr.key").getOrElse(System.getenv("GITHUB_TOKEN"))
             }
         }
     }
@@ -107,7 +107,8 @@ publishing {
 
             pom {
                 name = "ExtenRe Patcher"
-                description = "ExtenRe Project - Framework for patching and optimizing applications."
+                description = "ExtenRe Project."
+
                 licenses {
                     license {
                         name = "GNU General Public License v3.0"
@@ -116,14 +117,14 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = "LuisCupul04"
+                        id = "ExtenRe"
                         name = "LuisCupul04"
                     }
                 }
                 scm {
-                    connection = "scm:git:git://github.com/LuisCupul04/extenre-patcher.git"
-                    developerConnection = "scm:git:git@github.com:LuisCupul04/extenre-patcher.git"
-                    url = "https://github.com/LuisCupul04/extenre-patcher"
+                    connection = "scm:git:git://github.com/luiscupul04/extenre-patcher.git"
+                    developerConnection = "scm:git:git@github.com:luiscupul04/extenre-patcher.git"
+                    url = "https://github.com/luiscupul04/extenre-patcher"
                 }
             }
         }
@@ -131,14 +132,6 @@ publishing {
 }
 
 signing {
-    if (System.getenv("GPG_KEY_ID") == null || System.getenv("GPG_KEY") == null || System.getenv("GPG_KEY_PASSWORD") == null) {
-        logger.warn("GPG environment variables not set; skipping signing.")
-        return@signing
-    }
-    useInMemoryPgpKeys(
-        System.getenv("GPG_KEY_ID"),
-        System.getenv("GPG_KEY"),
-        System.getenv("GPG_KEY_PASSWORD")
-    )
+    isRequired = false
     sign(publishing.publications["extenre-patcher-publication"])
 }

@@ -14,6 +14,8 @@ import com.extenre.patcher.PatcherResult
 import com.extenre.patcher.util.ClassMerger.merge
 import com.extenre.patcher.util.MethodNavigator
 import com.extenre.patcher.util.PatchClasses
+import com.extenre.patcher.util.ProxyClassList
+import com.extenre.patcher.util.proxy.ClassProxy
 import com.android.tools.smali.dexlib2.Opcodes
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.DexFile
@@ -25,8 +27,6 @@ import lanchon.multidexlib2.RawDexIO
 import java.io.Closeable
 import java.io.FileFilter
 import java.util.logging.Logger
-
-import com.extenre.patcher.util.proxy.mutableTypes.MutableClass
 
 /**
  * A context for patches containing the current state of the bytecode.
@@ -57,11 +57,8 @@ class BytecodePatchContext internal constructor(private val config: PatcherConfi
         ).also { opcodes = it.opcodes }.classes
     )
 
-    /**
-     * All mutable classes for the target app and any extension classes.
-     */
-    val mutableClasses: Collection<MutableClass>
-        get() = patchClasses.classMap.values.map { patchClasses.mutableClassBy(it.classDef) }
+    @Deprecated("Here only for backwards compatibility. Instead use context class lookup methods")
+    val classes = ProxyClassList(patchClasses.classMap.values.map { it.classDef }.toMutableList())
 
     /**
      * Merge the extension of [bytecodePatch] into the [BytecodePatchContext].
@@ -76,6 +73,8 @@ class BytecodePatchContext internal constructor(private val config: PatcherConfi
                     logger.fine { "Adding class \"$classDef\"" }
 
                     patchClasses.addClass(classDef)
+
+                    classes += classDef // Backwards compatibility.
 
                     return@forEach
                 }
@@ -175,6 +174,20 @@ class BytecodePatchContext internal constructor(private val config: PatcherConfi
      */
     fun classDefForEach(action: (ClassDef) -> Unit) {
         patchClasses.forEach(action)
+    }
+
+    @Deprecated("Instead use classDefBy", ReplaceWith("classDefBy(predicate)"))
+    fun classBy(predicate: (ClassDef) -> Boolean) : ClassProxy? {
+        val classDef = patchClasses.classByOrNull(predicate) ?: return null
+        return ClassProxy(classDef, patchClasses)
+    }
+
+    /**
+     * @return The mutable instance of an immutable class.
+     */
+    @Deprecated("Instead use `mutableClassBy(String)`, `mutableClassBy(ClassDef)`, or `mutableClassBy(predicate)`")
+    fun proxy(classDef: ClassDef) : ClassProxy {
+        return ClassProxy(classDef, patchClasses)
     }
 
     /**

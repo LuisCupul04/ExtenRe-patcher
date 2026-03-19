@@ -8,7 +8,7 @@
   </picture>
 </p>
 
-# 💉 ExtenRe Patcher
+# 💉 ExtenRe Patcher 17
 
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/LuisCupul04/ExtenRe-patcher/release.yml)
 ![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)

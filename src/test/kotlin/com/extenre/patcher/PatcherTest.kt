@@ -171,8 +171,11 @@ internal object PatcherTest {
     fun `throws if unmatched fingerprint match is delegated`() {
         val patch = bytecodePatch {
             execute {
+                // Fingerprint can never match.
                 val fingerprint = fingerprint { }
-                fingerprint.instructionMatches(this)  // Usar 'this' como contexto
+
+                // Throws, because the fingerprint can't be matched.
+                fingerprint.patternMatch
             }
         }
 
@@ -185,8 +188,7 @@ internal object PatcherTest {
     @Test
     fun `matches fingerprint`() {
         every { patcher.context.bytecodeContext.patchClasses } returns PatchClasses(
-            setOf(
-                ImmutableClassDef(
+            setOf(ImmutableClassDef(
                     "class",
                     0,
                     null,
@@ -217,15 +219,9 @@ internal object PatcherTest {
         val patches = setOf(
             bytecodePatch {
                 execute {
-                    fingerprint.match(
-                        this.patchClasses.classMap.values.first().classDef.methods.first(),
-                        this
-                    )
-                    fingerprint2.match(
-                        this.patchClasses.classMap.values.first().classDef,
-                        this
-                    )
-                    fingerprint3.originalClassDef(this)
+                    fingerprint.match(patchClasses.classMap.values.first().classDef.methods.first())
+                    fingerprint2.match(patchClasses.classMap.values.first().classDef)
+                    fingerprint3.originalClassDef
                 }
             },
         )
@@ -234,9 +230,10 @@ internal object PatcherTest {
 
         with(patcher.context.bytecodeContext) {
             assertAll(
-                { assertNotNull(fingerprint.originalClassDefOrNull(this)) },
-                { assertNotNull(fingerprint2.originalClassDefOrNull(this)) },
-                { assertNotNull(fingerprint3.originalClassDefOrNull(this)) },
+                "Expected fingerprints to match.",
+                { assertNotNull(fingerprint.originalClassDefOrNull) },
+                { assertNotNull(fingerprint2.originalClassDefOrNull) },
+                { assertNotNull(fingerprint3.originalClassDefOrNull) },
             )
         }
     }

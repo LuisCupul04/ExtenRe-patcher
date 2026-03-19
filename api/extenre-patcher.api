@@ -63,7 +63,7 @@ public final class com/extenre/patcher/FingerprintKt {
 }
 
 public abstract interface class com/extenre/patcher/InstructionFilter {
-	public abstract fun getLocation ()Lcom/extenre/patcher/InstructionLocation;
+	public fun getLocation ()Lcom/extenre/patcher/InstructionLocation;
 	public abstract fun matches (Lcom/android/tools/smali/dexlib2/iface/Method;Lcom/android/tools/smali/dexlib2/iface/instruction/Instruction;)Z
 }
 
@@ -304,39 +304,39 @@ public final class com/extenre/patcher/extensions/InstructionExtensions {
 	public final fun addInstruction (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;ILjava/lang/String;)V
 	public final fun addInstruction (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;Lcom/android/tools/smali/dexlib2/builder/BuilderInstruction;)V
 	public final fun addInstruction (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;Ljava/lang/String;)V
+	public final fun addInstructions (Lcom/android/tools/smali/dexlib2/builder/MutableMethodImplementation;ILjava/util/List;)V
+	public final fun addInstructions (Lcom/android/tools/smali/dexlib2/builder/MutableMethodImplementation;Ljava/util/List;)V
 	public final fun addInstructions (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;ILjava/lang/String;)V
 	public final fun addInstructions (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;ILjava/util/List;)V
 	public final fun addInstructions (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;Ljava/lang/String;)V
 	public final fun addInstructions (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;Ljava/util/List;)V
-	public final fun addInstructions (Lcom/android/tools/smali/dexlib2/builder/MutableMethodImplementation;ILjava/util/List;)V
-	public final fun addInstructions (Lcom/android/tools/smali/dexlib2/builder/MutableMethodImplementation;Ljava/util/List;)V
 	public final fun addInstructionsWithLabels (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;ILjava/lang/String;[Lcom/extenre/patcher/util/smali/ExternalLabel;)V
-	public final fun getInstruction (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;I)Lcom/android/tools/smali/dexlib2/builder/BuilderInstruction;
-	public final fun getInstruction (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;I)Ljava/lang/Object;
 	public final fun getInstruction (Lcom/android/tools/smali/dexlib2/builder/MutableMethodImplementation;I)Lcom/android/tools/smali/dexlib2/builder/BuilderInstruction;
 	public final fun getInstruction (Lcom/android/tools/smali/dexlib2/builder/MutableMethodImplementation;I)Ljava/lang/Object;
 	public final fun getInstruction (Lcom/android/tools/smali/dexlib2/iface/Method;I)Lcom/android/tools/smali/dexlib2/iface/instruction/Instruction;
 	public final fun getInstruction (Lcom/android/tools/smali/dexlib2/iface/Method;I)Ljava/lang/Object;
 	public final fun getInstruction (Lcom/android/tools/smali/dexlib2/iface/MethodImplementation;I)Lcom/android/tools/smali/dexlib2/iface/instruction/Instruction;
 	public final fun getInstruction (Lcom/android/tools/smali/dexlib2/iface/MethodImplementation;I)Ljava/lang/Object;
-	public final fun getInstructionOrNull (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;I)Lcom/android/tools/smali/dexlib2/builder/BuilderInstruction;
-	public final fun getInstructionOrNull (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;I)Ljava/lang/Object;
+	public final fun getInstruction (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;I)Lcom/android/tools/smali/dexlib2/builder/BuilderInstruction;
+	public final fun getInstruction (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;I)Ljava/lang/Object;
 	public final fun getInstructionOrNull (Lcom/android/tools/smali/dexlib2/iface/Method;I)Lcom/android/tools/smali/dexlib2/iface/instruction/Instruction;
 	public final fun getInstructionOrNull (Lcom/android/tools/smali/dexlib2/iface/Method;I)Ljava/lang/Object;
-	public final fun getInstructions (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;)Ljava/util/List;
+	public final fun getInstructionOrNull (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;I)Lcom/android/tools/smali/dexlib2/builder/BuilderInstruction;
+	public final fun getInstructionOrNull (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;I)Ljava/lang/Object;
 	public final fun getInstructions (Lcom/android/tools/smali/dexlib2/iface/Method;)Ljava/lang/Iterable;
-	public final fun getInstructionsOrNull (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;)Ljava/util/List;
+	public final fun getInstructions (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;)Ljava/util/List;
 	public final fun getInstructionsOrNull (Lcom/android/tools/smali/dexlib2/iface/Method;)Ljava/lang/Iterable;
+	public final fun getInstructionsOrNull (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;)Ljava/util/List;
 	public final fun removeInstruction (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;I)V
-	public final fun removeInstructions (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;I)V
-	public final fun removeInstructions (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;II)V
 	public final fun removeInstructions (Lcom/android/tools/smali/dexlib2/builder/MutableMethodImplementation;I)V
 	public final fun removeInstructions (Lcom/android/tools/smali/dexlib2/builder/MutableMethodImplementation;II)V
+	public final fun removeInstructions (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;I)V
+	public final fun removeInstructions (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;II)V
 	public final fun replaceInstruction (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;ILcom/android/tools/smali/dexlib2/builder/BuilderInstruction;)V
 	public final fun replaceInstruction (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;ILjava/lang/String;)V
+	public final fun replaceInstructions (Lcom/android/tools/smali/dexlib2/builder/MutableMethodImplementation;ILjava/util/List;)V
 	public final fun replaceInstructions (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;ILjava/lang/String;)V
 	public final fun replaceInstructions (Lcom/extenre/patcher/util/proxy/mutableTypes/MutableMethod;ILjava/util/List;)V
-	public final fun replaceInstructions (Lcom/android/tools/smali/dexlib2/builder/MutableMethodImplementation;ILjava/util/List;)V
 }
 
 public final class com/extenre/patcher/patch/BytecodePatch : com/extenre/patcher/patch/Patch {
@@ -345,7 +345,7 @@ public final class com/extenre/patcher/patch/BytecodePatch : com/extenre/patcher
 }
 
 public final class com/extenre/patcher/patch/BytecodePatchBuilder : com/extenre/patcher/patch/PatchBuilder {
-	public synthetic fun build$revanced_patcher ()Lcom/extenre/patcher/patch/Patch;
+	public synthetic fun build$extenre_patcher ()Lcom/extenre/patcher/patch/Patch;
 	public final fun extendWith (Ljava/lang/String;)Lcom/extenre/patcher/patch/BytecodePatchBuilder;
 	public final fun getExtensionInputStream ()Ljava/util/function/Supplier;
 	public final fun setExtensionInputStream (Ljava/util/function/Supplier;)V
@@ -594,7 +594,7 @@ public final class com/extenre/patcher/patch/RawResourcePatch : com/extenre/patc
 }
 
 public final class com/extenre/patcher/patch/RawResourcePatchBuilder : com/extenre/patcher/patch/PatchBuilder {
-	public synthetic fun build$revanced_patcher ()Lcom/extenre/patcher/patch/Patch;
+	public synthetic fun build$extenre_patcher ()Lcom/extenre/patcher/patch/Patch;
 }
 
 public final class com/extenre/patcher/patch/ResourcePatch : com/extenre/patcher/patch/Patch {
@@ -602,7 +602,7 @@ public final class com/extenre/patcher/patch/ResourcePatch : com/extenre/patcher
 }
 
 public final class com/extenre/patcher/patch/ResourcePatchBuilder : com/extenre/patcher/patch/PatchBuilder {
-	public synthetic fun build$revanced_patcher ()Lcom/extenre/patcher/patch/Patch;
+	public synthetic fun build$extenre_patcher ()Lcom/extenre/patcher/patch/Patch;
 }
 
 public final class com/extenre/patcher/patch/ResourcePatchContext : com/extenre/patcher/patch/PatchContext {
@@ -805,8 +805,8 @@ public final class com/extenre/patcher/util/proxy/mutableTypes/MutableField : co
 	public fun getAnnotations ()Ljava/util/Set;
 	public fun getDefiningClass ()Ljava/lang/String;
 	public fun getHiddenApiRestrictions ()Ljava/util/Set;
-	public fun getInitialValue ()Lcom/extenre/patcher/util/proxy/mutableTypes/encodedValue/MutableEncodedValue;
 	public synthetic fun getInitialValue ()Lcom/android/tools/smali/dexlib2/iface/value/EncodedValue;
+	public fun getInitialValue ()Lcom/extenre/patcher/util/proxy/mutableTypes/encodedValue/MutableEncodedValue;
 	public fun getName ()Ljava/lang/String;
 	public fun getType ()Ljava/lang/String;
 	public final fun setAccessFlags (I)V

@@ -24,14 +24,15 @@ import kotlin.reflect.KProperty
 /**
  * A navigator for methods.
  *
- * @param context The bytecode patch context.
  * @param startMethod The [Method] to start navigating from.
+ *
+ * @constructor Creates a new [MethodNavigator].
  *
  * @throws NavigateException If the method does not have an implementation.
  * @throws NavigateException If the instruction at the specified index is not a method reference.
  */
+context(BytecodePatchContext)
 class MethodNavigator internal constructor(
-    private val context: BytecodePatchContext,
     private var startMethod: MethodReference,
 ) {
     private var lastNavigatedMethodReference = startMethod
@@ -86,7 +87,7 @@ class MethodNavigator internal constructor(
      *
      * @return The last navigated method mutably.
      */
-    fun stop() = context.mutableClassDefBy(lastNavigatedMethodReference.definingClass).firstMethodBySignature
+    fun stop() = mutableClassDefBy(lastNavigatedMethodReference.definingClass).firstMethodBySignature
         as MutableMethod
 
     /**
@@ -101,7 +102,7 @@ class MethodNavigator internal constructor(
      *
      * @return The last navigated method immutably.
      */
-    fun original(): Method = context.patchClasses.classBy(lastNavigatedMethodReference.definingClass).firstMethodBySignature
+    fun original(): Method = patchClasses.classBy(lastNavigatedMethodReference.definingClass).firstMethodBySignature
 
     /**
      * Find the first [lastNavigatedMethodReference] in the class.
@@ -118,10 +119,3 @@ class MethodNavigator internal constructor(
      */
     internal class NavigateException internal constructor(message: String) : Exception(message)
 }
-
-/**
- * Factory function to create a [MethodNavigator] with the given context and start method.
- */
-context(ctx: BytecodePatchContext)
-fun MethodNavigator(startMethod: MethodReference): MethodNavigator =
-    MethodNavigator(ctx, startMethod)
