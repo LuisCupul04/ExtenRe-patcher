@@ -48,9 +48,7 @@ dependencies {
 
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.multidexlib2) {
-        exclude(group = "com.android.tools.smali", module = "smali-dexlib2")
-    }
+    implementation(libs.multidexlib2)
     implementation(libs.smali)
 
     // Tests

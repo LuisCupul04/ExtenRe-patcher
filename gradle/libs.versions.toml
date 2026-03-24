@@ -4,7 +4,7 @@ binary-compatibility-validator = "0.18.1"
 kotlin = "2.3.10"
 kotlinx-coroutines-core = "1.10.2"
 mockk = "1.14.9"
-multidexlib2 = "3.0.3.E3.RE"
+multidexlib2 = "3.0.9.RE"
 # Tracking https://github.com/google/smali/issues/64.
 #noinspection GradleDependency
 smali = "3.0.9.RE"
