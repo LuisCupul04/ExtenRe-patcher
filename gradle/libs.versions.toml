@@ -8,7 +8,7 @@ mockk = "1.14.9"
 #noinspection GradleDependency
 smali = "3.0.9.RE"
 apktool-lib = "3.0.5.RE"
-multidexlib2 = "3.0.3.E3.RE"
+multidexlib2 = "3.0.9.RE"
 
 
 [libraries]
