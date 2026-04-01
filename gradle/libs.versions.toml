@@ -1,7 +1,7 @@
 [versions]
 android = "4.1.1.4"
 binary-compatibility-validator = "0.18.1"
-kotlin = "2.3.10"
+kotlin = "2.3.20"
 kotlinx-coroutines-core = "1.10.2"
 mockk = "1.14.9"
 multidexlib2 = "3.0.9.RE"
